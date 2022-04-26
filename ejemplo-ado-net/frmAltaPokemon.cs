@@ -22,19 +22,20 @@ namespace ejemplo_ado_net
          this.Close();
       }
 
-      private void btnAceptar_Click(object sender, EventArgs e)//1) Funcionalidad del botón Aceptar. Cargamos el pokemon nuevo
+      private void btnAceptar_Click(object sender, EventArgs e)
       {
          Pokemon poke = new Pokemon();
-         // (2)La idea es capturas los datos del formulario. Ahora hay que cargar la consulta a la base de datos
          PokemonNegocio negocio = new PokemonNegocio();
 
          try
          {
-            poke.Numero = int.Parse(txtNumero.Text);//Casteamos a número
+            poke.Numero = int.Parse(txtNumero.Text);
             poke.Nombre = txtNombre.Text;
             poke.Descripcion = txtDescripcion.Text;
-
-            negocio.agregarPokemon(poke);//(3)Mandamos el nuevo pokemon como argumento
+            //Capturamos en la carga los tipos de los desplegables
+            poke.Tipo = (Elemento)cboTipo.SelectedItem;//Casteamos el object a tipo Elemento.
+            poke.Debilidad = (Elemento)cboDebilidad.SelectedItem;
+            negocio.agregarPokemon(poke);
             MessageBox.Show("Agregado exitosamente");
             Close();
          }
@@ -44,7 +45,20 @@ namespace ejemplo_ado_net
             MessageBox.Show(ex.ToString());
          }
       }
-     
 
+      private void frmAltaPokemon_Load(object sender, EventArgs e)//Cargamos los desplegables en el evento de Load del formulario
+      {
+         ElementoNegocio elementoNegocio = new ElementoNegocio();
+
+         try
+         {
+            cboTipo.DataSource = elementoNegocio.listar();
+            cboDebilidad.DataSource = elementoNegocio.listar();
+         }
+         catch (Exception ex)
+         {
+            MessageBox.Show(ex.ToString());
+         }
+      }
    }
 }

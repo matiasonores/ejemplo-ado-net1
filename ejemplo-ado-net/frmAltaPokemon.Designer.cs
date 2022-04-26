@@ -37,12 +37,16 @@ namespace ejemplo_ado_net
          this.txtDescripcion = new System.Windows.Forms.TextBox();
          this.btnAceptar = new System.Windows.Forms.Button();
          this.btnCancelar = new System.Windows.Forms.Button();
+         this.cboTipo = new System.Windows.Forms.ComboBox();
+         this.cboDebilidad = new System.Windows.Forms.ComboBox();
+         this.lblTipo = new System.Windows.Forms.Label();
+         this.lblDebilidad = new System.Windows.Forms.Label();
          this.SuspendLayout();
          // 
          // lblNumero
          // 
          this.lblNumero.AutoSize = true;
-         this.lblNumero.Location = new System.Drawing.Point(120, 100);
+         this.lblNumero.Location = new System.Drawing.Point(59, 28);
          this.lblNumero.Name = "lblNumero";
          this.lblNumero.Size = new System.Drawing.Size(63, 20);
          this.lblNumero.TabIndex = 0;
@@ -51,7 +55,7 @@ namespace ejemplo_ado_net
          // lblNombre
          // 
          this.lblNombre.AutoSize = true;
-         this.lblNombre.Location = new System.Drawing.Point(120, 133);
+         this.lblNombre.Location = new System.Drawing.Point(59, 61);
          this.lblNombre.Name = "lblNombre";
          this.lblNombre.Size = new System.Drawing.Size(64, 20);
          this.lblNombre.TabIndex = 1;
@@ -60,7 +64,7 @@ namespace ejemplo_ado_net
          // lblDescripcion
          // 
          this.lblDescripcion.AutoSize = true;
-         this.lblDescripcion.Location = new System.Drawing.Point(96, 169);
+         this.lblDescripcion.Location = new System.Drawing.Point(35, 97);
          this.lblDescripcion.Name = "lblDescripcion";
          this.lblDescripcion.Size = new System.Drawing.Size(87, 20);
          this.lblDescripcion.TabIndex = 2;
@@ -68,21 +72,21 @@ namespace ejemplo_ado_net
          // 
          // txtNumero
          // 
-         this.txtNumero.Location = new System.Drawing.Point(216, 93);
+         this.txtNumero.Location = new System.Drawing.Point(155, 21);
          this.txtNumero.Name = "txtNumero";
          this.txtNumero.Size = new System.Drawing.Size(125, 27);
          this.txtNumero.TabIndex = 3;
          // 
          // txtNombre
          // 
-         this.txtNombre.Location = new System.Drawing.Point(216, 130);
+         this.txtNombre.Location = new System.Drawing.Point(155, 58);
          this.txtNombre.Name = "txtNombre";
          this.txtNombre.Size = new System.Drawing.Size(125, 27);
          this.txtNombre.TabIndex = 4;
          // 
          // txtDescripcion
          // 
-         this.txtDescripcion.Location = new System.Drawing.Point(216, 169);
+         this.txtDescripcion.Location = new System.Drawing.Point(155, 97);
          this.txtDescripcion.Name = "txtDescripcion";
          this.txtDescripcion.Size = new System.Drawing.Size(125, 27);
          this.txtDescripcion.TabIndex = 5;
@@ -107,11 +111,51 @@ namespace ejemplo_ado_net
          this.btnCancelar.UseVisualStyleBackColor = true;
          this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
          // 
+         // cboTipo
+         // 
+         this.cboTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+         this.cboTipo.FormattingEnabled = true;
+         this.cboTipo.Location = new System.Drawing.Point(155, 139);
+         this.cboTipo.Name = "cboTipo";
+         this.cboTipo.Size = new System.Drawing.Size(151, 28);
+         this.cboTipo.TabIndex = 8;
+         // 
+         // cboDebilidad
+         // 
+         this.cboDebilidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+         this.cboDebilidad.FormattingEnabled = true;
+         this.cboDebilidad.Location = new System.Drawing.Point(155, 173);
+         this.cboDebilidad.Name = "cboDebilidad";
+         this.cboDebilidad.Size = new System.Drawing.Size(151, 28);
+         this.cboDebilidad.TabIndex = 9;
+         // 
+         // lblTipo
+         // 
+         this.lblTipo.AutoSize = true;
+         this.lblTipo.Location = new System.Drawing.Point(83, 139);
+         this.lblTipo.Name = "lblTipo";
+         this.lblTipo.Size = new System.Drawing.Size(39, 20);
+         this.lblTipo.TabIndex = 10;
+         this.lblTipo.Text = "Tipo";
+         // 
+         // lblDebilidad
+         // 
+         this.lblDebilidad.AutoSize = true;
+         this.lblDebilidad.Location = new System.Drawing.Point(47, 173);
+         this.lblDebilidad.Name = "lblDebilidad";
+         this.lblDebilidad.Size = new System.Drawing.Size(75, 20);
+         this.lblDebilidad.TabIndex = 11;
+         this.lblDebilidad.Text = "Debilidad";
+         // 
          // frmAltaPokemon
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.ClientSize = new System.Drawing.Size(482, 453);
+         this.Controls.Add(this.lblDebilidad);
+         this.Controls.Add(this.lblTipo);
+         this.Controls.Add(this.cboDebilidad);
+         this.Controls.Add(this.cboTipo);
          this.Controls.Add(this.btnCancelar);
          this.Controls.Add(this.btnAceptar);
          this.Controls.Add(this.txtDescripcion);
@@ -123,6 +167,7 @@ namespace ejemplo_ado_net
          this.MinimumSize = new System.Drawing.Size(500, 500);
          this.Name = "frmAltaPokemon";
          this.Text = "Nuevo Pokemon";
+         this.Load += new System.EventHandler(this.frmAltaPokemon_Load);
          this.ResumeLayout(false);
          this.PerformLayout();
 
@@ -138,5 +183,9 @@ namespace ejemplo_ado_net
       private System.Windows.Forms.TextBox txtDescripcion;
       private System.Windows.Forms.Button btnAceptar;
       private System.Windows.Forms.Button btnCancelar;
+      private System.Windows.Forms.ComboBox cboTipo;
+      private System.Windows.Forms.ComboBox cboDebilidad;
+      private System.Windows.Forms.Label lblTipo;
+      private System.Windows.Forms.Label lblDebilidad;
    }
 }

@@ -60,5 +60,9 @@ namespace negocio
             throw ex;
          }
       }
+      public void setearParametro(string nombre, object value)//2)Esta funcion permite crear un parametro pasandole dos argumentos
+      {
+         comando.Parameters.AddWithValue(nombre, value);
+      }
    }
 }

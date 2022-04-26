@@ -61,9 +61,14 @@ namespace negocio
 
          try
          {
-            datos.setearConsulta("Insert into POKEMONS (Numero, Nombre, Descripcion, Activo)values(" + nuevo.Numero + ", '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "',1)");
-            //Super artesanal pero es una manera de hacerlo.
-            //Necesitamos crear ahora un método NonQuery.
+            datos.setearConsulta("Insert into POKEMONS (Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad)values(" + nuevo.Numero + ", '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "',1,@idTipo, @idDebilidad)");
+            //1)Esto que declaramos en la cadena se conoce como parametros.
+            //1)Como el parametro se encuentra encapsulado, vamos a tener que ir a la clase AccesoDatos y crear un método que me permita agregar esos parametros.
+
+            //3)Esta funcion ahora la podemos llamar del otro lado.
+
+            datos.setearParametro("@idTipo", nuevo.Tipo.Id);
+            datos.setearParametro("@idDebilidad", nuevo.Debilidad.Id);
             datos.ejecutarAccion();
          }
          catch (Exception ex)
