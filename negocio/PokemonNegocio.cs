@@ -55,5 +55,30 @@ namespace negocio
             throw ex;
          }
       }
+      public void agregarPokemon(Pokemon nuevo)
+      {
+         AccesoDatos datos = new AccesoDatos();
+
+         try
+         {
+            datos.setearConsulta("Insert into POKEMONS (Numero, Nombre, Descripcion, Activo)values(" + nuevo.Numero + ", '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "',1)");
+            //Super artesanal pero es una manera de hacerlo.
+            //Necesitamos crear ahora un método NonQuery.
+            datos.ejecutarAccion();
+         }
+         catch (Exception ex)
+         {
+            throw ex;
+         }
+         finally
+         {
+            datos.cerrarConexion();
+         }
+      }
+
+      public void modificarPokemon(Pokemon modificar)
+      {
+      
+      }
    }
 }

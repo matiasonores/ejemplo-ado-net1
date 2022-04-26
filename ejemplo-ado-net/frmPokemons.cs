@@ -44,9 +44,14 @@ namespace ejemplo_ado_net
          }
          catch (Exception ex)//Captura la excepcion de imagen faltante
          {
-            pbxPokemon.Load("https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg");
+            pbxPokemon.Load("https://i.ebayimg.com/images/g/JeIAAOSwMbRhbexb/s-l400.jpg");
          }
       }
 
+      private void btnAgregar_Click(object sender, EventArgs e)
+      {
+         frmAltaPokemon alta = new frmAltaPokemon();
+         alta.ShowDialog();
+      }
    }
 }

@@ -31,6 +31,7 @@ namespace ejemplo_ado_net
       {
          this.dgvPokemons = new System.Windows.Forms.DataGridView();
          this.pbxPokemon = new System.Windows.Forms.PictureBox();
+         this.btnAgregar = new System.Windows.Forms.Button();
          ((System.ComponentModel.ISupportInitialize)(this.dgvPokemons)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).BeginInit();
          this.SuspendLayout();
@@ -55,16 +56,27 @@ namespace ejemplo_ado_net
          this.pbxPokemon.TabIndex = 1;
          this.pbxPokemon.TabStop = false;
          // 
+         // btnAgregar
+         // 
+         this.btnAgregar.Location = new System.Drawing.Point(41, 380);
+         this.btnAgregar.Name = "btnAgregar";
+         this.btnAgregar.Size = new System.Drawing.Size(94, 29);
+         this.btnAgregar.TabIndex = 2;
+         this.btnAgregar.Text = "Agregar";
+         this.btnAgregar.UseVisualStyleBackColor = true;
+         this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+         // 
          // frmPokemons
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(1182, 328);
+         this.ClientSize = new System.Drawing.Size(1182, 453);
+         this.Controls.Add(this.btnAgregar);
          this.Controls.Add(this.pbxPokemon);
          this.Controls.Add(this.dgvPokemons);
          this.MaximizeBox = false;
-         this.MaximumSize = new System.Drawing.Size(1200, 375);
-         this.MinimumSize = new System.Drawing.Size(1200, 375);
+         this.MaximumSize = new System.Drawing.Size(1200, 500);
+         this.MinimumSize = new System.Drawing.Size(1200, 500);
          this.Name = "frmPokemons";
          this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
          this.Text = "Pokemons";
@@ -80,6 +92,7 @@ namespace ejemplo_ado_net
 
       private System.Windows.Forms.DataGridView dgvPokemons;
       private System.Windows.Forms.PictureBox pbxPokemon;
+      private System.Windows.Forms.Button btnAgregar;
    }
 }
 
