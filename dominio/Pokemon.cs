@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ejemplo_ado_net
+namespace dominio
 {
-   class Pokemon
+   public class Pokemon//Agregamos el public
    {
       public int Numero { get; set; }
       public string Nombre { get; set; }

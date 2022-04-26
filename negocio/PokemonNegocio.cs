@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks; 
-using System.Data.SqlClient; //Declaramos este using
+using System.Data.SqlClient;
+using dominio;
 
-namespace ejemplo_ado_net
+namespace negocio
 {
-   class PokemonNegocio
+   public class PokemonNegocio
    {
       public List<Pokemon> listar()
       {
          List<Pokemon> lista = new List<Pokemon>();
-         SqlConnection conexion = new SqlConnection(); //Para conectarnos
-         SqlCommand comando = new SqlCommand(); //Una vez conectados, vamos a necesitar realizar acciones con comando.
-         SqlDataReader lector; //Como resultado de las lecturas vamos a tener un set de datos que vamos a almacenar aca.
+         SqlConnection conexion = new SqlConnection(); 
+         SqlCommand comando = new SqlCommand(); 
+         SqlDataReader lector; 
 
 
          try
