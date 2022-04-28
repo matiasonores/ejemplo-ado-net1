@@ -4,7 +4,7 @@ using System.Text;
 
 namespace dominio
 {
-   public class Elemento//Agregamos el public
+   public class Elemento
    {
       public int Id { get; set; }
       public string Descripcion { get; set; }

@@ -14,7 +14,7 @@ namespace ejemplo_ado_net
 {
    public partial class frmPokemons : Form
    {
-      private List<Pokemon> listaPokemon;//Dentro del código del formulario declaramos un atributo privado
+      private List<Pokemon> listaPokemon;
       public frmPokemons()
       {
          InitializeComponent();
@@ -22,27 +22,38 @@ namespace ejemplo_ado_net
 
       private void frmPokemons_Load(object sender, EventArgs e)
       {
-         PokemonNegocio negocio = new PokemonNegocio();
-         listaPokemon = negocio.listar();//En ella vamos a guardar el resultado de negocio.listar()
-
-         dgvPokemons.DataSource = listaPokemon;//Ahora vamos a asignar el valor de la variable a dgvPokemon.DataSource.
-         dgvPokemons.Columns["UrlImagen"].Visible = false;//Cambiamos la propiedad de visibilidad a falso para ocultarla.
-         cargarImagen(listaPokemon[0].UrlImagen);//y ahora al picture box le pasamos el parametro de la lista. Encapsulamos despues reemplazando la instrucción pbxPokemon.Load por el método cargarImagen.
+         cargar();
       }
-
-      private void dgvPokemons_SelectionChanged(object sender, EventArgs e)//Agregamos evento en la grilla.
+      private void cargar()//Encapsulamos el evento de cargar la pantalla principal en un método private.
       {
-         Pokemon seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;//Nos devuelve un objeto de la fila seleccionada. Precisamos hacer un casteo explicito al tipo de objeto que estamos trabajando.
-         cargarImagen(seleccionado.UrlImagen); //y ahora lo podemos almacenar en la pictureBox
+         PokemonNegocio negocio = new PokemonNegocio();
+         try
+         {
+            listaPokemon = negocio.listar();
+            dgvPokemons.DataSource = listaPokemon;
+            dgvPokemons.Columns["UrlImagen"].Visible = false;
+            cargarImagen(listaPokemon[0].UrlImagen);
+            dgvPokemons.Columns["Id"].Visible = false;//Ocultamos la columna Id
+         }
+         catch (Exception ex)
+         {
+
+            MessageBox.Show(ex.ToString());
+         }
       }
-      private void cargarImagen(string imagen)//Modularizamos el codigo donde se repite la instrucción y agregamos el try catch.
+      private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
+      {
+         Pokemon seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+         cargarImagen(seleccionado.UrlImagen);
+      }
+      private void cargarImagen(string imagen)
 
       {
          try
          {
             pbxPokemon.Load(imagen);
          }
-         catch (Exception ex)//Captura la excepcion de imagen faltante
+         catch (Exception ex)
          {
             pbxPokemon.Load("https://i.ebayimg.com/images/g/JeIAAOSwMbRhbexb/s-l400.jpg");
          }
@@ -52,6 +63,17 @@ namespace ejemplo_ado_net
       {
          frmAltaPokemon alta = new frmAltaPokemon();
          alta.ShowDialog();
+         cargar();
+      }
+
+      private void btnModificar_Click(object sender, EventArgs e)//Para tocar un pokemon de la lista y que al momento de tocar un boton Modificar me cargue los datos del pokemon y me permita guardar los cambios.
+      {
+         Pokemon seleccionado;
+         seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+         frmAltaPokemon modificar = new frmAltaPokemon(seleccionado);
+         modificar.ShowDialog();
+         cargar();
+
       }
    }
 }

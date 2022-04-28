@@ -22,8 +22,7 @@ namespace negocio
          {
             conexion.ConnectionString = "server=STAR-DESTROYER\\SQLEXPRESS; database=POKEDEX_DB; integrated security = true";
             comando.CommandType = System.Data.CommandType.Text;
-            //comando.CommandText = "Select Numero, Nombre, Descripcion, UrlImagen from POKEMONS";//Agregamos la solicitud a la instruccion de consulta a la base de datos.
-            comando.CommandText = "Select Numero, Nombre, P.Descripcion, E.Descripcion Tipo, D.Descripcion Debilidad, UrlImagen from POKEMONS P, ELEMENTOS E, ELEMENTOS D Where E.Id = P.IdTipo And D.Id = P.IdDebilidad";//Modificamos la consulta a la base de datos:
+            comando.CommandText = "Select Numero, Nombre, P.Descripcion, E.Descripcion Tipo, D.Descripcion Debilidad, UrlImagen, P.IdTipo, P.IdDebilidad, P.Id from POKEMONS P, ELEMENTOS E, ELEMENTOS D Where E.Id = P.IdTipo And D.Id = P.IdDebilidad";//Modificamos la consulta a la base de datos:
             comando.Connection = conexion;
 
             conexion.Open();
@@ -32,15 +31,21 @@ namespace negocio
             while (lector.Read())
             {
                Pokemon aux = new Pokemon();
+               aux.Id = (int)lector["Id"];
                aux.Numero = lector.GetInt32(0);
                aux.Nombre = (string)lector["Nombre"];
                aux.Descripcion = (string)lector["Descripcion"];
-               aux.UrlImagen = (string)lector["UrlImagen"];//Agregamos el mapeo al lector.
-               aux.Tipo = new Elemento();
-               aux.Tipo.Descripcion = (string)lector["Tipo"];//En el lector cargamos el Tipo obtenido de la consulta. Indicamos el indice de la columna Tipo
-               aux.Debilidad = new Elemento();
-               aux.Debilidad.Descripcion = (string)lector["Debilidad"];//En el lector cargamos la Debilidad obtenida de la consulta. Indicamos el indice de la columna Debilidad
+               if (!(lector["UrlImagen"] is DBNull))
+                  aux.UrlImagen = (string)lector["UrlImagen"];
 
+               aux.Tipo = new Elemento();
+               aux.Tipo.Descripcion = (string)lector["Tipo"];
+               aux.Tipo.Id = (int)lector["IdTipo"];
+               aux.Debilidad = new Elemento();
+               aux.Debilidad.Descripcion = (string)lector["Debilidad"];
+               aux.Debilidad.Id = (int)lector["IdDebilidad"];
+               //Lo que esta sucediendo ahora es que hay que agregar ahora la solicitud de Id de Tipo y Debilidad para reflejar los cambios.
+               
                lista.Add(aux);
             }
 
@@ -61,14 +66,10 @@ namespace negocio
 
          try
          {
-            datos.setearConsulta("Insert into POKEMONS (Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad)values(" + nuevo.Numero + ", '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "',1,@idTipo, @idDebilidad)");
-            //1)Esto que declaramos en la cadena se conoce como parametros.
-            //1)Como el parametro se encuentra encapsulado, vamos a tener que ir a la clase AccesoDatos y crear un método que me permita agregar esos parametros.
-
-            //3)Esta funcion ahora la podemos llamar del otro lado.
-
+            datos.setearConsulta("Insert into POKEMONS (Numero, Nombre, Descripcion, Activo, IdTipo, IdDebilidad,UrlImagen)values(" + nuevo.Numero + ", '" + nuevo.Nombre + "', '" + nuevo.Descripcion + "',1,@idTipo, @idDebilidad,@urlImagen)");
             datos.setearParametro("@idTipo", nuevo.Tipo.Id);
             datos.setearParametro("@idDebilidad", nuevo.Debilidad.Id);
+            datos.setearParametro("@urlImagen", nuevo.UrlImagen);
             datos.ejecutarAccion();
          }
          catch (Exception ex)
@@ -81,9 +82,31 @@ namespace negocio
          }
       }
 
-      public void modificarPokemon(Pokemon modificar)
+      public void modificarPokemon(Pokemon poke)
       {
-      
+      AccesoDatos datos = new AccesoDatos();
+         try
+         {
+            datos.setearConsulta("update POKEMONS set Numero = @numero, Nombre = @nombre, Descripcion = @desc, UrlImagen = @img, IdTipo = @idTipo, IdDebilidad = @idDebilidad Where Id = @id");
+            
+            datos.setearParametro("@numero", poke.Numero);
+            datos.setearParametro("@nombre", poke.Nombre);
+            datos.setearParametro("@desc", poke.Descripcion);
+            datos.setearParametro("@img", poke.UrlImagen);
+            datos.setearParametro("@idTipo", poke.Tipo.Id);
+            datos.setearParametro("@idDebilidad", poke.Debilidad.Id);
+            datos.setearParametro("@id", poke.Id);
+
+            datos.ejecutarAccion();
+         }
+         catch (Exception ex)
+         {
+            throw ex;
+         }
+         finally
+         {
+            datos.cerrarConexion();
+         }
       }
    }
 }

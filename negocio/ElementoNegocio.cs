@@ -7,16 +7,16 @@ namespace negocio
 {
    public class ElementoNegocio
    {
-      public List<Elemento> listar()//Implementamos el uso de la clase AccesoDatos
+      public List<Elemento> listar()
       {
          List<Elemento> lista = new List<Elemento>();
          AccesoDatos datos = new AccesoDatos();
-         try //Hacemos uso de los métodos para hacer una consulta a la BD
+         try 
          {
             datos.setearConsulta("Select Id, Descripcion From ELEMENTOS");
             datos.ejecutarLectura();
             
-            while (datos.Lector.Read())//Hacemos uso de la propiedad Lector para recorrer la lectura
+            while (datos.Lector.Read())
             {
                Elemento aux = new Elemento();
                aux.Id = (int)datos.Lector["Id"];

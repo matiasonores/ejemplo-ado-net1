@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel;
+
 
 namespace dominio
 {
-   public class Pokemon//Agregamos el public
+   public class Pokemon
    {
+      [DisplayName("Número")]
       public int Numero { get; set; }
       public string Nombre { get; set; }
+      [DisplayName("Descripción")]
       public string Descripcion { get; set; }
 
-      public string UrlImagen { get; set; }//Agregamos una propiedad nueva para guardar la URL de la imagen.
+      public string UrlImagen { get; set; }
 
-      public Elemento Tipo { get; set; }//Agregamos la propiedad Tipo de tipo Elemento
-      public Elemento Debilidad { get; set; }//Agregamos la propiedad Debilidad de tipo Elemento
-
+      public Elemento Tipo { get; set; }
+      public Elemento Debilidad { get; set; }
+      public int Id { get; set; } //Agregamos la consulta en SQL server
 
    }
 }

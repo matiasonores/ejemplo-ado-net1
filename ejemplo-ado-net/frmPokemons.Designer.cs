@@ -32,6 +32,7 @@ namespace ejemplo_ado_net
          this.dgvPokemons = new System.Windows.Forms.DataGridView();
          this.pbxPokemon = new System.Windows.Forms.PictureBox();
          this.btnAgregar = new System.Windows.Forms.Button();
+         this.btnModificar = new System.Windows.Forms.Button();
          ((System.ComponentModel.ISupportInitialize)(this.dgvPokemons)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).BeginInit();
          this.SuspendLayout();
@@ -39,10 +40,13 @@ namespace ejemplo_ado_net
          // dgvPokemons
          // 
          this.dgvPokemons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+         this.dgvPokemons.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
          this.dgvPokemons.Location = new System.Drawing.Point(12, 12);
+         this.dgvPokemons.MultiSelect = false;
          this.dgvPokemons.Name = "dgvPokemons";
          this.dgvPokemons.RowHeadersWidth = 51;
          this.dgvPokemons.RowTemplate.Height = 29;
+         this.dgvPokemons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
          this.dgvPokemons.Size = new System.Drawing.Size(840, 300);
          this.dgvPokemons.TabIndex = 0;
          this.dgvPokemons.SelectionChanged += new System.EventHandler(this.dgvPokemons_SelectionChanged);
@@ -66,11 +70,22 @@ namespace ejemplo_ado_net
          this.btnAgregar.UseVisualStyleBackColor = true;
          this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
          // 
+         // btnModificar
+         // 
+         this.btnModificar.Location = new System.Drawing.Point(141, 380);
+         this.btnModificar.Name = "btnModificar";
+         this.btnModificar.Size = new System.Drawing.Size(94, 29);
+         this.btnModificar.TabIndex = 3;
+         this.btnModificar.Text = "Modificar";
+         this.btnModificar.UseVisualStyleBackColor = true;
+         this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+         // 
          // frmPokemons
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.ClientSize = new System.Drawing.Size(1182, 453);
+         this.Controls.Add(this.btnModificar);
          this.Controls.Add(this.btnAgregar);
          this.Controls.Add(this.pbxPokemon);
          this.Controls.Add(this.dgvPokemons);
@@ -93,6 +108,7 @@ namespace ejemplo_ado_net
       private System.Windows.Forms.DataGridView dgvPokemons;
       private System.Windows.Forms.PictureBox pbxPokemon;
       private System.Windows.Forms.Button btnAgregar;
+      private System.Windows.Forms.Button btnModificar;
    }
 }
 
