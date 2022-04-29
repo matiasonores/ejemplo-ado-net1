@@ -33,6 +33,7 @@ namespace ejemplo_ado_net
          this.pbxPokemon = new System.Windows.Forms.PictureBox();
          this.btnAgregar = new System.Windows.Forms.Button();
          this.btnModificar = new System.Windows.Forms.Button();
+         this.btnEliminarFisico = new System.Windows.Forms.Button();
          ((System.ComponentModel.ISupportInitialize)(this.dgvPokemons)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).BeginInit();
          this.SuspendLayout();
@@ -80,11 +81,22 @@ namespace ejemplo_ado_net
          this.btnModificar.UseVisualStyleBackColor = true;
          this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
          // 
+         // btnEliminarFisico
+         // 
+         this.btnEliminarFisico.Location = new System.Drawing.Point(241, 380);
+         this.btnEliminarFisico.Name = "btnEliminarFisico";
+         this.btnEliminarFisico.Size = new System.Drawing.Size(94, 29);
+         this.btnEliminarFisico.TabIndex = 4;
+         this.btnEliminarFisico.Text = "Eliminar";
+         this.btnEliminarFisico.UseVisualStyleBackColor = true;
+         this.btnEliminarFisico.Click += new System.EventHandler(this.btnEliminarFisico_Click);
+         // 
          // frmPokemons
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.ClientSize = new System.Drawing.Size(1182, 453);
+         this.Controls.Add(this.btnEliminarFisico);
          this.Controls.Add(this.btnModificar);
          this.Controls.Add(this.btnAgregar);
          this.Controls.Add(this.pbxPokemon);
@@ -109,6 +121,7 @@ namespace ejemplo_ado_net
       private System.Windows.Forms.PictureBox pbxPokemon;
       private System.Windows.Forms.Button btnAgregar;
       private System.Windows.Forms.Button btnModificar;
+      private System.Windows.Forms.Button btnEliminarFisico;
    }
 }
 

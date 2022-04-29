@@ -75,5 +75,30 @@ namespace ejemplo_ado_net
          cargar();
 
       }
+
+      private void btnEliminarFisico_Click(object sender, EventArgs e)
+      {
+         PokemonNegocio negocio = new PokemonNegocio();
+         Pokemon seleccionado;
+
+         try
+         {
+            DialogResult respuesta = MessageBox.Show("¿De verdad querés eliminarlo?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            //Validación de la funcionalidad de eliminación física
+
+            if (respuesta == DialogResult.Yes)
+            {
+               seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+               negocio.eliminarPokemon(seleccionado.Id);
+               MessageBox.Show("Eliminado éxitosamente");
+               cargar();
+            }
+         }
+
+         catch (Exception ex)
+         {
+            throw ex;
+         }
+      }
    }
 }
