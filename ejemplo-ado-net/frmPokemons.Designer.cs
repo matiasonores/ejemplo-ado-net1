@@ -34,6 +34,10 @@ namespace ejemplo_ado_net
          this.btnAgregar = new System.Windows.Forms.Button();
          this.btnModificar = new System.Windows.Forms.Button();
          this.btnEliminarFisico = new System.Windows.Forms.Button();
+         this.btnEliminarLogico = new System.Windows.Forms.Button();
+         this.lblFiltro = new System.Windows.Forms.Label();
+         this.btnFiltro = new System.Windows.Forms.Button();
+         this.txtFiltro = new System.Windows.Forms.TextBox();
          ((System.ComponentModel.ISupportInitialize)(this.dgvPokemons)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).BeginInit();
          this.SuspendLayout();
@@ -42,7 +46,7 @@ namespace ejemplo_ado_net
          // 
          this.dgvPokemons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
          this.dgvPokemons.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-         this.dgvPokemons.Location = new System.Drawing.Point(12, 12);
+         this.dgvPokemons.Location = new System.Drawing.Point(12, 61);
          this.dgvPokemons.MultiSelect = false;
          this.dgvPokemons.Name = "dgvPokemons";
          this.dgvPokemons.RowHeadersWidth = 51;
@@ -54,7 +58,7 @@ namespace ejemplo_ado_net
          // 
          // pbxPokemon
          // 
-         this.pbxPokemon.Location = new System.Drawing.Point(870, 12);
+         this.pbxPokemon.Location = new System.Drawing.Point(870, 61);
          this.pbxPokemon.Name = "pbxPokemon";
          this.pbxPokemon.Size = new System.Drawing.Size(300, 300);
          this.pbxPokemon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -63,7 +67,7 @@ namespace ejemplo_ado_net
          // 
          // btnAgregar
          // 
-         this.btnAgregar.Location = new System.Drawing.Point(41, 380);
+         this.btnAgregar.Location = new System.Drawing.Point(12, 395);
          this.btnAgregar.Name = "btnAgregar";
          this.btnAgregar.Size = new System.Drawing.Size(94, 29);
          this.btnAgregar.TabIndex = 2;
@@ -73,7 +77,7 @@ namespace ejemplo_ado_net
          // 
          // btnModificar
          // 
-         this.btnModificar.Location = new System.Drawing.Point(141, 380);
+         this.btnModificar.Location = new System.Drawing.Point(112, 395);
          this.btnModificar.Name = "btnModificar";
          this.btnModificar.Size = new System.Drawing.Size(94, 29);
          this.btnModificar.TabIndex = 3;
@@ -83,7 +87,7 @@ namespace ejemplo_ado_net
          // 
          // btnEliminarFisico
          // 
-         this.btnEliminarFisico.Location = new System.Drawing.Point(241, 380);
+         this.btnEliminarFisico.Location = new System.Drawing.Point(212, 395);
          this.btnEliminarFisico.Name = "btnEliminarFisico";
          this.btnEliminarFisico.Size = new System.Drawing.Size(94, 29);
          this.btnEliminarFisico.TabIndex = 4;
@@ -91,11 +95,51 @@ namespace ejemplo_ado_net
          this.btnEliminarFisico.UseVisualStyleBackColor = true;
          this.btnEliminarFisico.Click += new System.EventHandler(this.btnEliminarFisico_Click);
          // 
+         // btnEliminarLogico
+         // 
+         this.btnEliminarLogico.Location = new System.Drawing.Point(312, 395);
+         this.btnEliminarLogico.Name = "btnEliminarLogico";
+         this.btnEliminarLogico.Size = new System.Drawing.Size(121, 29);
+         this.btnEliminarLogico.TabIndex = 5;
+         this.btnEliminarLogico.Text = "Eliminar Logico";
+         this.btnEliminarLogico.UseVisualStyleBackColor = true;
+         this.btnEliminarLogico.Click += new System.EventHandler(this.btnEliminarLogico_Click);
+         // 
+         // lblFiltro
+         // 
+         this.lblFiltro.AutoSize = true;
+         this.lblFiltro.Location = new System.Drawing.Point(12, 30);
+         this.lblFiltro.Name = "lblFiltro";
+         this.lblFiltro.Size = new System.Drawing.Size(46, 20);
+         this.lblFiltro.TabIndex = 6;
+         this.lblFiltro.Text = "Filtro:";
+         // 
+         // btnFiltro
+         // 
+         this.btnFiltro.Location = new System.Drawing.Point(212, 27);
+         this.btnFiltro.Name = "btnFiltro";
+         this.btnFiltro.Size = new System.Drawing.Size(94, 29);
+         this.btnFiltro.TabIndex = 7;
+         this.btnFiltro.Text = "Buscar";
+         this.btnFiltro.UseVisualStyleBackColor = true;
+         this.btnFiltro.Click += new System.EventHandler(this.btnFiltro_Click);
+         // 
+         // txtFiltro
+         // 
+         this.txtFiltro.Location = new System.Drawing.Point(68, 27);
+         this.txtFiltro.Name = "txtFiltro";
+         this.txtFiltro.Size = new System.Drawing.Size(125, 27);
+         this.txtFiltro.TabIndex = 8;
+         // 
          // frmPokemons
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
          this.ClientSize = new System.Drawing.Size(1182, 453);
+         this.Controls.Add(this.txtFiltro);
+         this.Controls.Add(this.btnFiltro);
+         this.Controls.Add(this.lblFiltro);
+         this.Controls.Add(this.btnEliminarLogico);
          this.Controls.Add(this.btnEliminarFisico);
          this.Controls.Add(this.btnModificar);
          this.Controls.Add(this.btnAgregar);
@@ -112,6 +156,7 @@ namespace ejemplo_ado_net
          ((System.ComponentModel.ISupportInitialize)(this.dgvPokemons)).EndInit();
          ((System.ComponentModel.ISupportInitialize)(this.pbxPokemon)).EndInit();
          this.ResumeLayout(false);
+         this.PerformLayout();
 
       }
 
@@ -122,6 +167,10 @@ namespace ejemplo_ado_net
       private System.Windows.Forms.Button btnAgregar;
       private System.Windows.Forms.Button btnModificar;
       private System.Windows.Forms.Button btnEliminarFisico;
+      private System.Windows.Forms.Button btnEliminarLogico;
+      private System.Windows.Forms.Label lblFiltro;
+      private System.Windows.Forms.Button btnFiltro;
+      private System.Windows.Forms.TextBox txtFiltro;
    }
 }
 

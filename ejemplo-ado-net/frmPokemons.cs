@@ -31,9 +31,8 @@ namespace ejemplo_ado_net
          {
             listaPokemon = negocio.listar();
             dgvPokemons.DataSource = listaPokemon;
-            dgvPokemons.Columns["UrlImagen"].Visible = false;
             cargarImagen(listaPokemon[0].UrlImagen);
-            dgvPokemons.Columns["Id"].Visible = false;//Ocultamos la columna Id
+            ocultarColumnas();
          }
          catch (Exception ex)
          {
@@ -43,8 +42,15 @@ namespace ejemplo_ado_net
       }
       private void dgvPokemons_SelectionChanged(object sender, EventArgs e)
       {
-         Pokemon seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
-         cargarImagen(seleccionado.UrlImagen);
+         //Error SelectedIndexChanged 
+         //Esto se puede generar al querer llevar adelante una funcionalidad programada para el evento de cargar la imagen
+         //de una fila seleccionada, agregando una condición if se puede hacer:
+
+         if (dgvPokemons.CurrentRow != null)//Si hay algo en la fila
+         {
+            Pokemon seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+            cargarImagen(seleccionado.UrlImagen);
+         }
       }
       private void cargarImagen(string imagen)
 
@@ -78,6 +84,15 @@ namespace ejemplo_ado_net
 
       private void btnEliminarFisico_Click(object sender, EventArgs e)
       {
+         eliminar();
+      }
+      private void btnEliminarLogico_Click(object sender, EventArgs e)
+      {
+         eliminar(true);
+      }
+
+      private void eliminar(bool logico = false)
+      {
          PokemonNegocio negocio = new PokemonNegocio();
          Pokemon seleccionado;
 
@@ -89,6 +104,10 @@ namespace ejemplo_ado_net
             if (respuesta == DialogResult.Yes)
             {
                seleccionado = (Pokemon)dgvPokemons.CurrentRow.DataBoundItem;
+
+               if (logico)
+                  negocio.eliminarLogico(seleccionado.Id);
+               else
                negocio.eliminarPokemon(seleccionado.Id);
                MessageBox.Show("Eliminado éxitosamente");
                cargar();
@@ -100,5 +119,33 @@ namespace ejemplo_ado_net
             throw ex;
          }
       }
-   }
+
+      private void btnFiltro_Click(object sender, EventArgs e)
+      {
+         List<Pokemon> listaFiltrada;
+         string filtro = txtFiltro.Text;
+         if (filtro != "")//Generamos una condición para que muestre la lista completa si no hay filtros aplicados.
+         {
+            //Como la expresión de busqueda es una expresión lógica, podemos agregar otras condiciones lógicas:
+
+            //listaFiltrada = listaPokemon.FindAll(x => x.Nombre == txtFiltro.Text);
+            listaFiltrada = listaPokemon.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+
+         }
+         else
+         {
+            listaFiltrada = listaPokemon;
+         }
+         //Expresión lambda:Esto es una suerte de foreach, que va a recorrer la colección comparando el nombre del objeto
+         //y si existe una coincidencia los va a agregar a la nueva colección: listaFiltrada
+         dgvPokemons.DataSource = null; //Limpiamos la grilla primero y luego la cargamos con el nuevo origen.
+         dgvPokemons.DataSource = listaFiltrada;
+         ocultarColumnas();
+      }
+      private void ocultarColumnas()//Encapsulamos tambien el método de ocultar las columnas en una función private para evitar repetir el código
+      {
+         dgvPokemons.Columns["UrlImagen"].Visible= false;
+         dgvPokemons.Columns["Id"].Visible= false;
+      }
+}
 }
